@@ -6,7 +6,7 @@ import { serve } from '@hono/node-server';
 // Region identifier - set via environment variable
 const REGION = process.env.KEYFETCH_REGION || 'unknown';
 const PORT = parseInt(process.env.PORT || '3000', 10);
-const KEYKEEPER_API = process.env.KEYKEEPER_API || 'https://keykeeper.world/api';
+const KEYKEEPER_API = process.env.KEYKEEPER_API || 'https://klawkeeper.xyz/api';
 const SERVICE_SECRET = process.env.SERVICE_SECRET || 'dev-service-secret';
 const USAGE_REPORT_INTERVAL = parseInt(process.env.USAGE_REPORT_INTERVAL || '30000', 10); // 30 seconds
 
@@ -50,7 +50,7 @@ interface VerifyResponse {
   error?: string;
 }
 
-// Pending usage records to be reported to KeyKeeper
+// Pending usage records to be reported to KlawKeeper
 const pendingUsage: UsageRecord[] = [];
 
 // Cache for token verification (TTL 60 seconds)
@@ -90,7 +90,7 @@ app.get('/v1/regions', (c) => {
   });
 });
 
-// Verify token against KeyKeeper API
+// Verify token against KlawKeeper API
 async function verifyToken(token: string): Promise<VerifyResponse> {
   if (!token) {
     return { valid: false, error: 'No token provided' };
@@ -129,13 +129,13 @@ async function verifyToken(token: string): Promise<VerifyResponse> {
 
     return data;
   } catch (error) {
-    console.error('KeyKeeper verification error:', error);
-    // On KeyKeeper connection failure, deny access for security
+    console.error('KlawKeeper verification error:', error);
+    // On KlawKeeper connection failure, deny access for security
     return { valid: false, error: 'Authentication service unavailable' };
   }
 }
 
-// Report usage to KeyKeeper
+// Report usage to KlawKeeper
 async function reportUsage(): Promise<void> {
   if (pendingUsage.length === 0) {
     return;
@@ -167,7 +167,7 @@ async function reportUsage(): Promise<void> {
       console.log(`Usage reported: ${result.processed} records, ${result.total_credits_deducted} credits deducted`);
     }
   } catch (error) {
-    console.error('Failed to report usage to KeyKeeper:', error);
+    console.error('Failed to report usage to KlawKeeper:', error);
     // Put records back for retry
     pendingUsage.push(...records);
   }
@@ -236,7 +236,7 @@ app.post('/v1/fetch', async (c) => {
   const fetchOptions: RequestInit = {
     method,
     headers: {
-      'User-Agent': 'KeyFetch/1.0',
+      'User-Agent': 'KlawFetch/1.0',
       ...body.headers,
     },
     signal: AbortSignal.timeout(timeout),
@@ -259,7 +259,7 @@ app.post('/v1/fetch', async (c) => {
       responseHeaders[key] = value;
     });
 
-    // Queue usage record for reporting to KeyKeeper
+    // Queue usage record for reporting to KlawKeeper
     pendingUsage.push({
       agent_id: auth.agent_id!,
       operation: 'proxy_request',
@@ -334,13 +334,13 @@ app.get('/v1/usage', async (c) => {
 const openapiSpec = {
   openapi: '3.1.0',
   info: {
-    title: 'KeyFetch API',
+    title: 'KlawFetch API',
     description: 'HTTP proxy for AI agents. Make outbound HTTP requests from multiple global regions. Bypass geo-restrictions and rate limits.',
     version: '1.0.0',
-    contact: { name: 'KeyFetch Support', url: 'https://keyfetch.world', email: 'support@keyfetch.world' },
-    'x-logo': { url: 'https://keyfetch.world/logo.png' }
+    contact: { name: 'KlawFetch Support', url: 'https://klawfetch.xyz', email: 'support@klawfetch.xyz' },
+    'x-logo': { url: 'https://klawfetch.xyz/logo.png' }
   },
-  servers: [{ url: 'https://api.keyfetch.world', description: 'Production' }],
+  servers: [{ url: 'https://api.klawfetch.xyz', description: 'Production' }],
   tags: [
     { name: 'Proxy', description: 'HTTP proxy requests' },
     { name: 'Regions', description: 'Available proxy regions' },
@@ -351,7 +351,7 @@ const openapiSpec = {
       post: {
         tags: ['Proxy'],
         summary: 'Proxy an HTTP request',
-        description: 'Make an HTTP request through KeyFetch proxy. Request originates from the specified region.',
+        description: 'Make an HTTP request through KlawFetch proxy. Request originates from the specified region.',
         operationId: 'proxyRequest',
         security: [{ bearerAuth: [] }],
         requestBody: {
@@ -400,7 +400,7 @@ const openapiSpec = {
   },
   components: {
     securitySchemes: {
-      bearerAuth: { type: 'http', scheme: 'bearer', description: 'KeyKeeper API token from keykeeper.world' }
+      bearerAuth: { type: 'http', scheme: 'bearer', description: 'KlawKeeper API token from klawkeeper.xyz' }
     },
     schemas: {
       FetchRequest: {
@@ -486,9 +486,9 @@ process.on('SIGINT', async () => {
 });
 
 // Start server
-console.log(`KeyFetch API starting on port ${PORT}`);
+console.log(`KlawFetch API starting on port ${PORT}`);
 console.log(`Region: ${REGION}`);
-console.log(`KeyKeeper API: ${KEYKEEPER_API}`);
+console.log(`KlawKeeper API: ${KEYKEEPER_API}`);
 console.log(`Usage report interval: ${USAGE_REPORT_INTERVAL}ms`);
 
 serve({

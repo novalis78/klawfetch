@@ -1,10 +1,10 @@
 // Cloudflare Pages Function - Proxy /v1/* requests to regional backends
-// Regional backend servers for KeyFetch
+// Regional backend servers for KlawFetch
 const BACKENDS = {
-  'eu-frankfurt': 'http://fra.keyfetch.world:3000',
-  'ap-sydney': 'http://syd.keyfetch.world:3000',
-  'us-west': 'http://sfo.keyfetch.world:3000',
-  'us-east': 'http://nyc.keyfetch.world:3000',
+  'eu-frankfurt': 'http://fra.klawfetch.xyz:3000',
+  'ap-sydney': 'http://syd.klawfetch.xyz:3000',
+  'us-west': 'http://sfo.klawfetch.xyz:3000',
+  'us-east': 'http://nyc.klawfetch.xyz:3000',
 };
 
 const DEFAULT_REGION = 'us-east';

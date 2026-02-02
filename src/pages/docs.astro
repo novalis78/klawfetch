@@ -3,8 +3,8 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout
-  title="KeyFetch Documentation — Complete API Reference"
-  description="Complete documentation for KeyFetch HTTP proxy API. Learn how to make geo-located HTTP requests from Frankfurt, Sydney, New York, or San Francisco."
+  title="KlawFetch Documentation — Complete API Reference"
+  description="Complete documentation for KlawFetch HTTP proxy API. Learn how to make geo-located HTTP requests from Frankfurt, Sydney, New York, or San Francisco."
 >
   <!-- Background -->
   <div class="fixed inset-0 -z-10 bg-[#0a0a0a]">
@@ -21,7 +21,7 @@ import Layout from '../layouts/Layout.astro';
               <path stroke-linecap="round" stroke-linejoin="round" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
             </svg>
           </div>
-          KeyFetch
+          KlawFetch
         </a>
 
         <div class="hidden md:flex items-center gap-8">
@@ -30,7 +30,7 @@ import Layout from '../layouts/Layout.astro';
           <a href="/docs" class="text-[13px] text-white transition-colors">Docs</a>
         </div>
 
-        <a href="https://keykeeper.world" target="_blank" class="inline-flex items-center gap-1.5 rounded-full bg-white px-4 py-1.5 text-[13px] font-medium text-zinc-900 transition-opacity hover:opacity-90">
+        <a href="https://klawkeeper.xyz" target="_blank" class="inline-flex items-center gap-1.5 rounded-full bg-white px-4 py-1.5 text-[13px] font-medium text-zinc-900 transition-opacity hover:opacity-90">
           Get API Key
         </a>
       </div>
@@ -43,7 +43,7 @@ import Layout from '../layouts/Layout.astro';
       <header class="py-12 border-b border-white/5">
         <h1 class="text-4xl font-semibold tracking-tight text-white mb-4">Documentation</h1>
         <p class="text-lg text-zinc-400">
-          Everything you need to integrate KeyFetch into your application or AI agent.
+          Everything you need to integrate KlawFetch into your application or AI agent.
         </p>
       </header>
 
@@ -69,7 +69,7 @@ import Layout from '../layouts/Layout.astro';
         <section id="overview" class="mb-16">
           <h2 class="text-2xl font-semibold text-white mb-4">Overview</h2>
           <p class="text-zinc-400 leading-relaxed mb-6">
-            KeyFetch is an HTTP proxy service that allows you to make web requests from different geographic locations.
+            KlawFetch is an HTTP proxy service that allows you to make web requests from different geographic locations.
             It's designed specifically for AI agents and automated systems that need to:
           </p>
           <ul class="list-disc list-inside text-zinc-400 space-y-2 mb-6">
@@ -86,7 +86,7 @@ import Layout from '../layouts/Layout.astro';
               <li>• Custom headers and request bodies</li>
               <li>• Response headers and body returned</li>
               <li>• Latency metrics for each request</li>
-              <li>• Pay-per-request billing via KeyKeeper</li>
+              <li>• Pay-per-request billing via KlawKeeper</li>
             </ul>
           </div>
         </section>
@@ -95,7 +95,7 @@ import Layout from '../layouts/Layout.astro';
         <section id="authentication" class="mb-16">
           <h2 class="text-2xl font-semibold text-white mb-4">Authentication</h2>
           <p class="text-zinc-400 leading-relaxed mb-6">
-            All API requests require authentication using a Bearer token from KeyKeeper.
+            All API requests require authentication using a Bearer token from KlawKeeper.
             Include your token in the Authorization header:
           </p>
           <div class="rounded-xl border border-white/5 bg-white/[0.02] overflow-hidden mb-6">
@@ -104,8 +104,8 @@ import Layout from '../layouts/Layout.astro';
             </div>
           </div>
           <p class="text-zinc-400 leading-relaxed">
-            To get an API token, create an account at <a href="https://keykeeper.world" class="text-white hover:underline">keykeeper.world</a>
-            and add credits to your balance. KeyFetch charges $0.001 per request.
+            To get an API token, create an account at <a href="https://klawkeeper.xyz" class="text-white hover:underline">klawkeeper.xyz</a>
+            and add credits to your balance. KlawFetch charges $0.001 per request.
           </p>
         </section>
 
@@ -121,7 +121,7 @@ import Layout from '../layouts/Layout.astro';
               <span class="text-sm font-medium text-white">Basic GET Request</span>
             </div>
             <div class="p-5 overflow-x-auto">
-              <pre class="font-mono text-[13px] leading-relaxed"><code>curl -X POST https://keyfetch.world/v1/fetch \
+              <pre class="font-mono text-[13px] leading-relaxed"><code>curl -X POST https://klawfetch.xyz/v1/fetch \
   -H "Authorization: Bearer YOUR_TOKEN" \
   -H "Content-Type: application/json" \
   -d '&#123;
@@ -136,7 +136,7 @@ import Layout from '../layouts/Layout.astro';
               <span class="text-sm font-medium text-white">POST Request with Body</span>
             </div>
             <div class="p-5 overflow-x-auto">
-              <pre class="font-mono text-[13px] leading-relaxed"><code>curl -X POST https://keyfetch.world/v1/fetch \
+              <pre class="font-mono text-[13px] leading-relaxed"><code>curl -X POST https://klawfetch.xyz/v1/fetch \
   -H "Authorization: Bearer YOUR_TOKEN" \
   -H "Content-Type: application/json" \
   -d '&#123;
@@ -220,7 +220,7 @@ import Layout from '../layouts/Layout.astro';
               <pre class="font-mono text-[13px] leading-relaxed"><code><span class="text-zinc-500">import</span> requests
 
 response = requests.post(
-    <span class="text-zinc-400">"https://keyfetch.world/v1/fetch"</span>,
+    <span class="text-zinc-400">"https://klawfetch.xyz/v1/fetch"</span>,
     headers=&#123;
         <span class="text-zinc-400">"Authorization"</span>: <span class="text-zinc-400">"Bearer YOUR_TOKEN"</span>,
         <span class="text-zinc-400">"Content-Type"</span>: <span class="text-zinc-400">"application/json"</span>
@@ -243,7 +243,7 @@ result = response.json()
               <span class="text-sm font-medium text-white">JavaScript / Node.js</span>
             </div>
             <div class="p-5 overflow-x-auto">
-              <pre class="font-mono text-[13px] leading-relaxed"><code><span class="text-zinc-500">const</span> response = <span class="text-zinc-500">await</span> fetch(<span class="text-zinc-400">"https://keyfetch.world/v1/fetch"</span>, &#123;
+              <pre class="font-mono text-[13px] leading-relaxed"><code><span class="text-zinc-500">const</span> response = <span class="text-zinc-500">await</span> fetch(<span class="text-zinc-400">"https://klawfetch.xyz/v1/fetch"</span>, &#123;
   method: <span class="text-zinc-400">"POST"</span>,
   headers: &#123;
     <span class="text-zinc-400">"Authorization"</span>: <span class="text-zinc-400">"Bearer YOUR_TOKEN"</span>,
@@ -267,7 +267,7 @@ console.log(<span class="text-zinc-400">`Latency: $&#123;result.latency_ms&#125;
         <section id="regions" class="mb-16">
           <h2 class="text-2xl font-semibold text-white mb-4">Regions</h2>
           <p class="text-zinc-400 leading-relaxed mb-6">
-            KeyFetch operates from 4 global regions. Each region has dedicated servers with static IP addresses.
+            KlawFetch operates from 4 global regions. Each region has dedicated servers with static IP addresses.
           </p>
 
           <div class="grid sm:grid-cols-2 gap-4 mb-6">
@@ -355,7 +355,7 @@ console.log(<span class="text-zinc-400">`Latency: $&#123;result.latency_ms&#125;
                 </tr>
                 <tr class="border-t border-white/5">
                   <td class="px-4 py-3 font-mono text-white">402</td>
-                  <td class="px-4 py-3">Insufficient credits in KeyKeeper account</td>
+                  <td class="px-4 py-3">Insufficient credits in KlawKeeper account</td>
                 </tr>
                 <tr class="border-t border-white/5">
                   <td class="px-4 py-3 font-mono text-white">429</td>
@@ -378,7 +378,7 @@ console.log(<span class="text-zinc-400">`Latency: $&#123;result.latency_ms&#125;
         <section id="rate-limits" class="mb-16">
           <h2 class="text-2xl font-semibold text-white mb-4">Rate Limits</h2>
           <p class="text-zinc-400 leading-relaxed mb-6">
-            KeyFetch enforces rate limits to ensure fair usage:
+            KlawFetch enforces rate limits to ensure fair usage:
           </p>
           <ul class="list-disc list-inside text-zinc-400 space-y-2">
             <li>60 requests per minute per API key</li>
@@ -409,7 +409,7 @@ console.log(<span class="text-zinc-400">`Latency: $&#123;result.latency_ms&#125;
             </div>
             <div class="rounded-xl border border-white/5 bg-white/[0.02] p-5">
               <h3 class="text-white font-medium mb-2">Monitor your usage</h3>
-              <p class="text-sm text-zinc-400">Track your KeyKeeper balance and set up alerts for low credits.</p>
+              <p class="text-sm text-zinc-400">Track your KlawKeeper balance and set up alerts for low credits.</p>
             </div>
           </div>
         </section>
@@ -421,7 +421,7 @@ console.log(<span class="text-zinc-400">`Latency: $&#123;result.latency_ms&#125;
           <a href="/api" class="text-sm text-zinc-400 hover:text-white transition-colors">
             ← API Reference
           </a>
-          <a href="https://keykeeper.world" target="_blank" class="text-sm text-zinc-400 hover:text-white transition-colors">
+          <a href="https://klawkeeper.xyz" target="_blank" class="text-sm text-zinc-400 hover:text-white transition-colors">
             Get API Key →
           </a>
         </div>

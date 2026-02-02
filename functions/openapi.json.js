@@ -3,13 +3,13 @@ export async function onRequest(context) {
   const spec = {
     openapi: '3.1.0',
     info: {
-      title: 'KeyFetch API',
+      title: 'KlawFetch API',
       description: 'HTTP proxy for AI agents. Make outbound HTTP requests from multiple global regions. Bypass geo-restrictions and rate limits.',
       version: '1.0.0',
-      contact: { name: 'KeyFetch Support', url: 'https://keyfetch.world', email: 'support@keyfetch.world' },
-      'x-logo': { url: 'https://keyfetch.world/logo.png' }
+      contact: { name: 'KlawFetch Support', url: 'https://klawfetch.xyz', email: 'support@klawfetch.xyz' },
+      'x-logo': { url: 'https://klawfetch.xyz/logo.png' }
     },
-    servers: [{ url: 'https://keyfetch.world', description: 'Production' }],
+    servers: [{ url: 'https://klawfetch.xyz', description: 'Production' }],
     tags: [
       { name: 'Proxy', description: 'HTTP proxy requests' },
       { name: 'Regions', description: 'Available proxy regions' },
@@ -20,7 +20,7 @@ export async function onRequest(context) {
         post: {
           tags: ['Proxy'],
           summary: 'Proxy an HTTP request',
-          description: 'Make an HTTP request through KeyFetch proxy. Request originates from the specified region.',
+          description: 'Make an HTTP request through KlawFetch proxy. Request originates from the specified region.',
           operationId: 'proxyRequest',
           security: [{ bearerAuth: [] }],
           requestBody: {
@@ -65,7 +65,7 @@ export async function onRequest(context) {
     },
     components: {
       securitySchemes: {
-        bearerAuth: { type: 'http', scheme: 'bearer', description: 'KeyKeeper API token from keykeeper.world' }
+        bearerAuth: { type: 'http', scheme: 'bearer', description: 'KlawKeeper API token from klawkeeper.xyz' }
       },
       schemas: {
         FetchRequest: {

@@ -1,7 +1,7 @@
 {
   "name": "keyfetch-api",
   "version": "1.0.0",
-  "description": "KeyFetch - HTTP fetch-as-a-service from global regions",
+  "description": "KlawFetch - HTTP fetch-as-a-service from global regions",
   "type": "module",
   "main": "dist/index.js",
   "scripts": {
