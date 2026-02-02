@@ -4,31 +4,33 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'Fira Code', 'ui-monospace', 'monospace'],
+        sans: ['DM Sans', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        display: ['Space Grotesk', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        mono: ['IBM Plex Mono', 'ui-monospace', 'monospace'],
       },
       colors: {
         surface: {
-          DEFAULT: '#09090b',
-          subtle: '#18181b',
-          muted: '#27272a',
+          DEFAULT: '#0a0a0f',
+          subtle: '#12121a',
+          muted: '#1a1a24',
         },
         line: {
-          DEFAULT: '#3f3f46',
-          subtle: '#27272a',
+          DEFAULT: '#30303d',
+          subtle: '#252530',
         },
         content: {
-          DEFAULT: '#fafafa',
-          muted: '#a1a1aa',
-          subtle: '#71717a',
+          DEFAULT: '#f5f5f7',
+          muted: '#9ca3af',
+          subtle: '#6b7280',
         },
         accent: {
-          DEFAULT: '#22d3ee',
-          muted: '#0891b2',
-          subtle: '#164e63',
+          DEFAULT: '#f59e0b',
+          secondary: '#8b5cf6',
+          muted: '#d97706',
+          subtle: '#92400e',
         },
-        success: '#22c55e',
-        warning: '#eab308',
+        success: '#10b981',
+        warning: '#f59e0b',
       },
     },
   },
