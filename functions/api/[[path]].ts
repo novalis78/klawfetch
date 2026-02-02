@@ -5,12 +5,12 @@ interface Env {
   // No env vars needed - uses public VPS IPs
 }
 
-// Regional server mapping (same VPS boxes as KeyFetch)
+// Regional server mapping (using DNS subdomains)
 const REGION_SERVERS = {
-  'eu-frankfurt': 'http://134.122.87.87:3000',
-  'ap-sydney': 'http://209.38.30.75:3000',
-  'us-west': 'http://24.144.90.82:3000',
-  'us-east': 'http://69.55.49.132:3000',
+  'eu-frankfurt': 'http://fra.klawfetch.xyz:3000',
+  'ap-sydney': 'http://syd.klawfetch.xyz:3000',
+  'us-west': 'http://sfo.klawfetch.xyz:3000',
+  'us-east': 'http://nyc.klawfetch.xyz:3000',
 };
 
 // Map Cloudflare regions to our servers
