@@ -1,8 +1,10 @@
 # KlawFetch - HTTP Client for Agents
 
 **Service:** KlawFetch
-**API Base:** `https://api.klawfetch.xyz`
-**Purpose:** Make HTTP requests and capture screenshots without browser fingerprinting or CORS issues
+**API Base:** `https://klawfetch.xyz/api`
+**Purpose:** Make HTTP requests from multiple global regions (Frankfurt, Sydney, San Francisco, New York)
+
+**Regional VPS Network:** Requests are automatically routed to the closest server based on your location.
 
 ## What This Service Does
 
@@ -23,7 +25,7 @@ Get your API key at [klawkeeper.xyz](https://klawkeeper.xyz)
 ### 1. Fetch URL (HTML/Text)
 
 ```bash
-POST https://api.klawfetch.xyz/fetch
+POST https://klawfetch.xyz/api/fetch
 Authorization: Bearer YOUR_API_KEY
 Content-Type: application/json
 
@@ -51,7 +53,7 @@ Content-Type: application/json
 ### 2. POST with Body
 
 ```bash
-POST https://api.klawfetch.xyz/fetch
+POST https://klawfetch.xyz/api/fetch
 Authorization: Bearer YOUR_API_KEY
 Content-Type: application/json
 
@@ -70,7 +72,7 @@ Content-Type: application/json
 ### 3. Capture Screenshot
 
 ```bash
-POST https://api.klawfetch.xyz/screenshot
+POST https://klawfetch.xyz/api/screenshot
 Authorization: Bearer YOUR_API_KEY
 Content-Type: application/json
 
@@ -103,7 +105,7 @@ Screenshots are hosted for 24 hours. Download immediately if you need permanent 
 Extract specific data from HTML:
 
 ```bash
-POST https://api.klawfetch.xyz/scrape
+POST https://klawfetch.xyz/api/scrape
 Authorization: Bearer YOUR_API_KEY
 Content-Type: application/json
 
@@ -135,7 +137,7 @@ Content-Type: application/json
 ### 5. Follow Redirects
 
 ```bash
-POST https://api.klawfetch.xyz/fetch
+POST https://klawfetch.xyz/api/fetch
 {
   "url": "https://bit.ly/abc123",
   "follow_redirects": true,
@@ -160,7 +162,7 @@ POST https://api.klawfetch.xyz/fetch
 For sites that require JavaScript:
 
 ```bash
-POST https://api.klawfetch.xyz/render
+POST https://klawfetch.xyz/api/render
 Authorization: Bearer YOUR_API_KEY
 Content-Type: application/json
 
@@ -211,7 +213,7 @@ Returns parsed JSON instead of string body.
 Make requests to APIs that block your agent's IP or require specific headers:
 
 ```bash
-curl -X POST https://api.klawfetch.xyz/fetch \
+curl -X POST https://klawfetch.xyz/api/fetch \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -d '{
     "url": "https://external-api.com/v1/data",
@@ -223,7 +225,7 @@ curl -X POST https://api.klawfetch.xyz/fetch \
 Extract product data, job listings, news articles:
 
 ```bash
-curl -X POST https://api.klawfetch.xyz/scrape \
+curl -X POST https://klawfetch.xyz/api/scrape \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -d '{
     "url": "https://news-site.com",
@@ -238,7 +240,7 @@ curl -X POST https://api.klawfetch.xyz/scrape \
 Capture visual state of dashboards, admin panels:
 
 ```bash
-curl -X POST https://api.klawfetch.xyz/screenshot \
+curl -X POST https://klawfetch.xyz/api/screenshot \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -d '{
     "url": "https://dashboard.example.com",
@@ -251,7 +253,7 @@ Fetch from sites that would block your browser due to CORS:
 
 ```bash
 # This would fail in browser, but works via KlawFetch
-curl -X POST https://api.klawfetch.xyz/fetch \
+curl -X POST https://klawfetch.xyz/api/fetch \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -d '{"url": "https://cors-restricted-api.com/data"}'
 ```
@@ -304,13 +306,13 @@ Legitimate scraping, API proxying, and monitoring are fine.
 
 ```bash
 # 1. Fetch a page
-curl -X POST https://api.klawfetch.xyz/fetch \
+curl -X POST https://klawfetch.xyz/api/fetch \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"url": "https://news.ycombinator.com"}'
 
 # 2. Scrape specific data
-curl -X POST https://api.klawfetch.xyz/scrape \
+curl -X POST https://klawfetch.xyz/api/scrape \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -d '{
     "url": "https://news.ycombinator.com",
@@ -320,7 +322,7 @@ curl -X POST https://api.klawfetch.xyz/scrape \
   }'
 
 # 3. Capture visual proof
-curl -X POST https://api.klawfetch.xyz/screenshot \
+curl -X POST https://klawfetch.xyz/api/screenshot \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -d '{
     "url": "https://news.ycombinator.com",
