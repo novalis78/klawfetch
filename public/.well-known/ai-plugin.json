@@ -1,0 +1,19 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "KeyFetch",
+  "name_for_model": "keyfetch",
+  "description_for_human": "Make HTTP requests from different global regions. Fetch-as-a-service for AI agents.",
+  "description_for_model": "KeyFetch is an HTTP proxy API designed for AI agents. Make web requests from 4 global regions: Frankfurt (Germany), Sydney (Australia), San Francisco (USA), and New York (USA). Use for geo-restricted content, regional testing, or specific IP requirements. Agents can sign up and pay with cryptocurrency through KeyKeeper - no human interaction required. Cost: $0.001 per request. Authentication: Bearer token from KeyKeeper.",
+  "auth": {
+    "type": "service_http",
+    "authorization_type": "bearer",
+    "verification_tokens": {}
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://keyfetch.world/.well-known/openapi.yaml"
+  },
+  "logo_url": "https://keyfetch.world/logo.png",
+  "contact_email": "support@keykeeper.world",
+  "legal_info_url": "https://keykeeper.world/terms"
+}

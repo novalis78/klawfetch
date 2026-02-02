@@ -1,0 +1,310 @@
+openapi: 3.1.0
+info:
+  title: KeyFetch API
+  description: |
+    HTTP proxy API for AI agents. Make requests from 4 global regions.
+
+    ## Authentication
+    All requests require a Bearer token from KeyKeeper (https://keykeeper.world).
+
+    ```
+    Authorization: Bearer kk_your_api_key_here
+    ```
+
+    ## Pricing
+    $0.001 per request, billed through your KeyKeeper account.
+
+    ## Rate Limits
+    - 60 requests per minute per API key
+    - 10 concurrent requests per API key
+    - 10MB maximum response size
+    - 30 second default timeout (configurable up to 60s)
+
+    ## Regions
+    | ID | Location | Country |
+    |----|----------|---------|
+    | eu-frankfurt | Frankfurt | Germany |
+    | ap-sydney | Sydney | Australia |
+    | us-west | San Francisco | USA |
+    | us-east | New York | USA |
+
+    ## Error Codes
+    | Code | Meaning |
+    |------|---------|
+    | 400 | Invalid request (missing url, invalid region, etc.) |
+    | 401 | Missing or invalid API key |
+    | 402 | Insufficient credits - top up at keykeeper.world |
+    | 429 | Rate limit exceeded - wait and retry |
+    | 502 | Target URL unreachable or timed out |
+    | 500 | Internal server error |
+
+  version: 1.0.0
+  contact:
+    name: KeyKeeper Support
+    url: https://keykeeper.world
+    email: support@keykeeper.world
+  license:
+    name: Proprietary
+    url: https://keykeeper.world/terms
+
+servers:
+  - url: https://keyfetch.world
+    description: Production API (routes to nearest region)
+
+security:
+  - bearerAuth: []
+
+paths:
+  /v1/fetch:
+    post:
+      operationId: proxyFetch
+      summary: Execute HTTP request from specified region
+      description: |
+        Makes an HTTP request from one of our global edge servers and returns the response.
+        The request is executed from the IP address of the selected region.
+
+        **Cost:** $0.001 per request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - url
+              properties:
+                url:
+                  type: string
+                  format: uri
+                  description: Target URL to fetch
+                  example: https://api.example.com/data
+                region:
+                  type: string
+                  enum: [eu-frankfurt, ap-sydney, us-west, us-east]
+                  description: Region to make the request from. Defaults to us-east.
+                  default: us-east
+                method:
+                  type: string
+                  enum: [GET, POST, PUT, DELETE, PATCH, HEAD, OPTIONS]
+                  description: HTTP method
+                  default: GET
+                headers:
+                  type: object
+                  additionalProperties:
+                    type: string
+                  description: Custom headers to send with the request
+                  example:
+                    Accept: application/json
+                    User-Agent: MyAgent/1.0
+                body:
+                  description: Request body (for POST/PUT/PATCH). Can be string or object.
+                timeout:
+                  type: integer
+                  minimum: 1000
+                  maximum: 60000
+                  description: Request timeout in milliseconds
+                  default: 30000
+            examples:
+              simple_get:
+                summary: Simple GET request
+                value:
+                  url: https://httpbin.org/ip
+                  region: eu-frankfurt
+              post_with_body:
+                summary: POST with JSON body
+                value:
+                  url: https://api.example.com/data
+                  method: POST
+                  region: us-east
+                  headers:
+                    Content-Type: application/json
+                  body:
+                    key: value
+      responses:
+        '200':
+          description: Successful proxy response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: HTTP status code from target
+                    example: 200
+                  headers:
+                    type: object
+                    additionalProperties:
+                      type: string
+                    description: Response headers from target
+                  body:
+                    type: string
+                    description: Response body from target (as string)
+                  region:
+                    type: string
+                    description: Region that executed the request
+                    example: eu-frankfurt
+                  latency_ms:
+                    type: integer
+                    description: Request latency in milliseconds
+                    example: 142
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                error: Invalid request
+                message: Missing required field 'url'
+        '401':
+          description: Missing or invalid authorization
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                error: Unauthorized
+                message: Invalid or missing API key
+        '402':
+          description: Insufficient credits
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                error: Payment Required
+                message: Insufficient credits. Top up at https://keykeeper.world
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                error: Rate Limit Exceeded
+                message: Too many requests. Limit is 60/minute.
+          headers:
+            Retry-After:
+              schema:
+                type: integer
+              description: Seconds to wait before retrying
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: Request limit per minute
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: Requests remaining in current window
+        '502':
+          description: Target URL unreachable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                error: Bad Gateway
+                message: Target URL unreachable or timed out
+
+  /v1/regions:
+    get:
+      operationId: listRegions
+      summary: List available regions
+      description: Returns a list of all available regions and their current status. No authentication required.
+      security: []
+      responses:
+        '200':
+          description: List of regions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  regions:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: eu-frankfurt
+                        name:
+                          type: string
+                          example: Frankfurt
+                        country:
+                          type: string
+                          example: Germany
+                        country_code:
+                          type: string
+                          example: DE
+                        status:
+                          type: string
+                          enum: [online, offline, degraded]
+                          example: online
+              example:
+                regions:
+                  - id: eu-frankfurt
+                    name: Frankfurt
+                    country: Germany
+                    country_code: DE
+                    status: online
+                  - id: ap-sydney
+                    name: Sydney
+                    country: Australia
+                    country_code: AU
+                    status: online
+                  - id: us-west
+                    name: San Francisco
+                    country: USA
+                    country_code: US
+                    status: online
+                  - id: us-east
+                    name: New York
+                    country: USA
+                    country_code: US
+                    status: online
+
+  /v1/health:
+    get:
+      operationId: healthCheck
+      summary: Health check
+      description: Returns server health status. No authentication required.
+      security: []
+      responses:
+        '200':
+          description: Server is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+                  timestamp:
+                    type: string
+                    format: date-time
+              example:
+                status: ok
+                timestamp: "2025-12-02T23:45:00Z"
+
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error type
+        message:
+          type: string
+          description: Human-readable error message
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: |
+        KeyKeeper API token. Get yours at https://keykeeper.world
+
+        For AI agents: Register programmatically via POST https://keykeeper.world/api/register

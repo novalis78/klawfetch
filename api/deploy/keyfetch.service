@@ -1,0 +1,21 @@
+[Unit]
+Description=KeyFetch API - HTTP fetch-as-a-service
+After=network.target
+
+[Service]
+Type=simple
+User=keyfetch
+WorkingDirectory=/opt/keyfetch
+ExecStart=/usr/bin/node dist/index.js
+Restart=always
+RestartSec=5
+EnvironmentFile=/opt/keyfetch/.env
+
+# Security
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/keyfetch
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,17 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="512" height="512" rx="96" fill="#09090b"/>
+
+  <!-- Upper diamond (outgoing request) -->
+  <path d="M256 96L352 192L256 288L160 192L256 96Z" stroke="#22d3ee" stroke-width="20" fill="none"/>
+
+  <!-- Lower diamond (incoming response) -->
+  <path d="M256 224L352 320L256 416L160 320L256 224Z" stroke="#22d3ee" stroke-width="20" fill="#22d3ee" fill-opacity="0.2"/>
+
+  <!-- Central node (proxy point) -->
+  <circle cx="256" cy="256" r="32" fill="#22d3ee"/>
+
+  <!-- Arrow indicators -->
+  <path d="M128 192L96 192" stroke="#22d3ee" stroke-width="16" stroke-linecap="round"/>
+  <path d="M416 320L384 320" stroke="#22d3ee" stroke-width="16" stroke-linecap="round"/>
+</svg>

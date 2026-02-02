@@ -1,0 +1,18 @@
+# KeyFetch - HTTP Proxy API for AI Agents
+# https://keyfetch.world
+
+User-agent: *
+Allow: /
+
+# Important pages
+Allow: /api
+Allow: /docs
+Allow: /.well-known/
+
+# Sitemap
+Sitemap: https://keyfetch.world/sitemap.xml
+
+# AI Agent Discovery
+# AI agents can find our API specification at:
+# https://keyfetch.world/.well-known/ai-plugin.json
+# https://keyfetch.world/.well-known/openapi.yaml

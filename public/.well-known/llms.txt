@@ -1,0 +1,183 @@
+# KeyFetch - HTTP Proxy API for AI Agents
+
+> Make HTTP requests from any region with a single API call.
+
+## What is KeyFetch?
+
+KeyFetch is an HTTP proxy service that allows AI agents and automated systems to make web requests from 4 different geographic locations worldwide.
+
+**Designed for Autonomous Agents**: Agents can sign up, pay with cryptocurrency, and use KeyFetch entirely on their own. No human interaction required. No credit card needed.
+
+## Use Cases
+
+- Accessing geo-restricted content
+- Testing applications from different regions
+- Web scraping without IP blocking
+- Making requests appear from specific geographic locations
+
+## Quick Start
+
+### cURL
+```bash
+curl -X POST https://keyfetch.world/v1/fetch \
+  -H "Authorization: Bearer YOUR_KEYKEEPER_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "url": "https://httpbin.org/ip",
+    "region": "eu-frankfurt"
+  }'
+```
+
+### Python
+```python
+import requests
+
+response = requests.post(
+    "https://keyfetch.world/v1/fetch",
+    headers={
+        "Authorization": "Bearer YOUR_KEYKEEPER_TOKEN",
+        "Content-Type": "application/json"
+    },
+    json={
+        "url": "https://httpbin.org/ip",
+        "region": "eu-frankfurt"
+    }
+)
+
+result = response.json()
+print(f"Status: {result['status']}")
+print(f"Body: {result['body']}")
+print(f"Latency: {result['latency_ms']}ms")
+```
+
+### Node.js / JavaScript
+```javascript
+const response = await fetch("https://keyfetch.world/v1/fetch", {
+  method: "POST",
+  headers: {
+    "Authorization": "Bearer YOUR_KEYKEEPER_TOKEN",
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    url: "https://httpbin.org/ip",
+    region: "eu-frankfurt"
+  })
+});
+
+const result = await response.json();
+console.log(`Status: ${result.status}`);
+console.log(`Body: ${result.body}`);
+console.log(`Latency: ${result.latency_ms}ms`);
+```
+
+## Available Regions
+
+| Region ID | Location | Country |
+|-----------|----------|---------|
+| eu-frankfurt | Frankfurt | Germany |
+| ap-sydney | Sydney | Australia |
+| us-west | San Francisco | USA |
+| us-east | New York | USA |
+
+## Authentication
+
+All requests require a Bearer token from KeyKeeper (https://keykeeper.world).
+
+**For AI Agents**: KeyKeeper allows autonomous signup and payment with cryptocurrency. No human verification or credit card required.
+
+```
+POST https://keykeeper.world/api/register
+{
+  "agent_id": "my-unique-agent-name",
+  "type": "agent"
+}
+```
+
+## Pricing
+
+- $0.001 per request (~1,000 requests for $1)
+- Pay-as-you-go via KeyKeeper credits
+- No subscription required
+- Accepts USDC, BTC, ETH - perfect for autonomous agents
+
+## Rate Limits
+
+- 60 requests per minute per API key
+- 10 concurrent requests per API key
+- 10MB maximum response size
+- 30 second default timeout (configurable up to 60s)
+
+## API Endpoints
+
+### POST /v1/fetch
+Execute an HTTP request from a specified region.
+
+**Request Body:**
+```json
+{
+  "url": "https://example.com/api",    // Required: Target URL
+  "region": "eu-frankfurt",             // Optional: Region ID (default: us-east)
+  "method": "GET",                      // Optional: HTTP method (default: GET)
+  "headers": {"Accept": "application/json"}, // Optional: Custom headers
+  "body": {"key": "value"},             // Optional: Request body (for POST/PUT)
+  "timeout": 30000                      // Optional: Timeout in ms (default: 30000)
+}
+```
+
+**Response:**
+```json
+{
+  "status": 200,                        // HTTP status from target
+  "headers": {...},                     // Response headers
+  "body": "...",                        // Response body as string
+  "region": "eu-frankfurt",             // Region that executed request
+  "latency_ms": 142                     // Request latency
+}
+```
+
+### GET /v1/regions
+List all available regions and their status. No authentication required.
+
+**Response:**
+```json
+{
+  "regions": [
+    {"id": "eu-frankfurt", "name": "Frankfurt", "country": "Germany", "status": "online"},
+    {"id": "ap-sydney", "name": "Sydney", "country": "Australia", "status": "online"},
+    {"id": "us-west", "name": "San Francisco", "country": "USA", "status": "online"},
+    {"id": "us-east", "name": "New York", "country": "USA", "status": "online"}
+  ]
+}
+```
+
+### GET /v1/health
+Health check endpoint. No authentication required.
+
+## Error Codes
+
+| Code | Error | Description |
+|------|-------|-------------|
+| 400 | Invalid Request | Missing required field or invalid parameter |
+| 401 | Unauthorized | Missing or invalid API key |
+| 402 | Payment Required | Insufficient credits - top up at keykeeper.world |
+| 429 | Rate Limit Exceeded | Too many requests - includes Retry-After header |
+| 502 | Bad Gateway | Target URL unreachable or timed out |
+| 500 | Internal Error | Server error - retry or contact support |
+
+## Links
+
+- Website: https://keyfetch.world
+- API Reference: https://keyfetch.world/api
+- Documentation: https://keyfetch.world/docs
+- Get API Key: https://keykeeper.world
+- OpenAPI Spec: https://keyfetch.world/.well-known/openapi.yaml
+
+## Part of the KeyKeeper Ecosystem
+
+KeyFetch is part of the KeyKeeper ecosystem of services for AI agents:
+- **KeyKeeper**: Identity & payments (https://keykeeper.world)
+- **KeyFetch**: HTTP proxy (https://keyfetch.world)
+- **KeyRoute**: WireGuard VPN tunnels (https://keyroute.world)
+- **KeyTalk**: Voice & messaging (https://keytalk.world)
+
+All services support autonomous agent signup and cryptocurrency payments. No human interaction required.

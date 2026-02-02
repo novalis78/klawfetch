@@ -1,0 +1,320 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const regions = [
+  { id: 'eu-frankfurt', name: 'Frankfurt', country: 'DE', ip: '134.122.87.87', latency: '~20ms' },
+  { id: 'ap-sydney', name: 'Sydney', country: 'AU', ip: '209.38.30.75', latency: '~40ms' },
+  { id: 'us-west', name: 'San Francisco', country: 'US', ip: '24.144.90.82', latency: '~15ms' },
+  { id: 'us-east', name: 'New York', country: 'US', ip: '69.55.49.132', latency: '~10ms' },
+];
+---
+
+<Layout
+  title="KeyFetch API — HTTP Proxy API for AI Agents"
+  description="Complete API reference for KeyFetch. Make HTTP requests from any region with a single API call. Built for AI agents and automated systems."
+>
+  <!-- Background -->
+  <div class="fixed inset-0 -z-10 bg-[#0a0a0a]">
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(56,189,248,0.08),transparent)]"></div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 left-0 right-0 z-50 border-b border-white/5 bg-[#0a0a0a]/80 backdrop-blur-xl">
+    <div class="mx-auto max-w-6xl px-6">
+      <div class="flex h-16 items-center justify-between">
+        <a href="/" class="flex items-center gap-2.5 text-white font-medium">
+          <div class="flex h-7 w-7 items-center justify-center rounded-lg bg-white/10">
+            <svg class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
+            </svg>
+          </div>
+          KeyFetch
+        </a>
+
+        <div class="hidden md:flex items-center gap-8">
+          <a href="/" class="text-[13px] text-zinc-400 hover:text-white transition-colors">Home</a>
+          <a href="/api" class="text-[13px] text-white transition-colors">API</a>
+          <a href="/docs" class="text-[13px] text-zinc-400 hover:text-white transition-colors">Docs</a>
+        </div>
+
+        <a href="https://keykeeper.world" target="_blank" class="inline-flex items-center gap-1.5 rounded-full bg-white px-4 py-1.5 text-[13px] font-medium text-zinc-900 transition-opacity hover:opacity-90">
+          Get API Key
+          <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="pt-24 pb-16">
+    <!-- Hero -->
+    <section class="py-16">
+      <div class="mx-auto max-w-4xl px-6">
+        <div class="text-center mb-12">
+          <div class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-zinc-400 mb-6">
+            <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+            API v1
+          </div>
+          <h1 class="text-4xl font-semibold tracking-tight text-white mb-4">
+            KeyFetch API
+          </h1>
+          <p class="text-lg text-zinc-400 max-w-2xl mx-auto">
+            Make HTTP requests from any of our 4 global regions. Simple REST API designed for AI agents and automated systems.
+          </p>
+        </div>
+
+        <!-- Quick Start -->
+        <div class="rounded-xl border border-white/10 bg-white/[0.02] overflow-hidden mb-12">
+          <div class="flex items-center justify-between px-4 py-3 border-b border-white/5">
+            <span class="text-sm font-medium text-white">Quick Start</span>
+            <span class="text-xs text-zinc-500 font-mono">curl</span>
+          </div>
+          <div class="p-5 overflow-x-auto">
+            <pre class="font-mono text-[13px] leading-relaxed"><code><span class="text-zinc-500"># Make a request from Frankfurt</span>
+<span class="text-zinc-300">curl</span> -X POST https://keyfetch.world/v1/fetch \
+  -H <span class="text-emerald-400">"Authorization: Bearer YOUR_KEYKEEPER_TOKEN"</span> \
+  -H <span class="text-emerald-400">"Content-Type: application/json"</span> \
+  -d <span class="text-sky-400">'&#123;
+    "url": "https://api.example.com/data",
+    "region": "eu-frankfurt",
+    "method": "GET"
+  &#125;'</span></code></pre>
+          </div>
+        </div>
+
+        <!-- Base URL -->
+        <div class="grid md:grid-cols-2 gap-6 mb-12">
+          <div class="rounded-xl border border-white/5 bg-white/[0.02] p-6">
+            <h3 class="text-sm font-medium text-white mb-2">Base URL</h3>
+            <code class="text-sm font-mono text-zinc-400">https://keyfetch.world</code>
+          </div>
+          <div class="rounded-xl border border-white/5 bg-white/[0.02] p-6">
+            <h3 class="text-sm font-medium text-white mb-2">Authentication</h3>
+            <code class="text-sm font-mono text-zinc-400">Bearer &lt;keykeeper_token&gt;</code>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Endpoints -->
+    <section class="py-12 border-t border-white/5">
+      <div class="mx-auto max-w-4xl px-6">
+        <h2 class="text-2xl font-semibold text-white mb-8">Endpoints</h2>
+
+        <!-- POST /v1/fetch -->
+        <div class="mb-12">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="text-xs font-medium text-emerald-500 bg-emerald-500/10 px-2 py-1 rounded">POST</span>
+            <code class="text-lg font-mono text-white">/v1/fetch</code>
+          </div>
+          <p class="text-zinc-400 mb-6">
+            Execute an HTTP request from the specified region and return the response.
+          </p>
+
+          <div class="rounded-xl border border-white/5 bg-white/[0.02] overflow-hidden mb-6">
+            <div class="px-4 py-3 border-b border-white/5">
+              <span class="text-sm font-medium text-zinc-300">Request Body</span>
+            </div>
+            <div class="p-5 overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="text-left text-zinc-500">
+                    <th class="pb-3 pr-4 font-medium">Parameter</th>
+                    <th class="pb-3 pr-4 font-medium">Type</th>
+                    <th class="pb-3 pr-4 font-medium">Required</th>
+                    <th class="pb-3 font-medium">Description</th>
+                  </tr>
+                </thead>
+                <tbody class="text-zinc-400">
+                  <tr class="border-t border-white/5">
+                    <td class="py-3 pr-4 font-mono text-white">url</td>
+                    <td class="py-3 pr-4">string</td>
+                    <td class="py-3 pr-4"><span class="text-emerald-500">Yes</span></td>
+                    <td class="py-3">Target URL to fetch</td>
+                  </tr>
+                  <tr class="border-t border-white/5">
+                    <td class="py-3 pr-4 font-mono text-white">region</td>
+                    <td class="py-3 pr-4">string</td>
+                    <td class="py-3 pr-4"><span class="text-zinc-500">No</span></td>
+                    <td class="py-3">Region to fetch from (default: auto)</td>
+                  </tr>
+                  <tr class="border-t border-white/5">
+                    <td class="py-3 pr-4 font-mono text-white">method</td>
+                    <td class="py-3 pr-4">string</td>
+                    <td class="py-3 pr-4"><span class="text-zinc-500">No</span></td>
+                    <td class="py-3">HTTP method (default: GET)</td>
+                  </tr>
+                  <tr class="border-t border-white/5">
+                    <td class="py-3 pr-4 font-mono text-white">headers</td>
+                    <td class="py-3 pr-4">object</td>
+                    <td class="py-3 pr-4"><span class="text-zinc-500">No</span></td>
+                    <td class="py-3">Custom headers to send</td>
+                  </tr>
+                  <tr class="border-t border-white/5">
+                    <td class="py-3 pr-4 font-mono text-white">body</td>
+                    <td class="py-3 pr-4">any</td>
+                    <td class="py-3 pr-4"><span class="text-zinc-500">No</span></td>
+                    <td class="py-3">Request body (for POST/PUT)</td>
+                  </tr>
+                  <tr class="border-t border-white/5">
+                    <td class="py-3 pr-4 font-mono text-white">timeout</td>
+                    <td class="py-3 pr-4">number</td>
+                    <td class="py-3 pr-4"><span class="text-zinc-500">No</span></td>
+                    <td class="py-3">Timeout in ms (default: 30000)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- GET /v1/regions -->
+        <div class="mb-12">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="text-xs font-medium text-sky-500 bg-sky-500/10 px-2 py-1 rounded">GET</span>
+            <code class="text-lg font-mono text-white">/v1/regions</code>
+          </div>
+          <p class="text-zinc-400 mb-6">
+            List all available regions and their status.
+          </p>
+        </div>
+
+        <!-- GET /health -->
+        <div class="mb-12">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="text-xs font-medium text-sky-500 bg-sky-500/10 px-2 py-1 rounded">GET</span>
+            <code class="text-lg font-mono text-white">/health</code>
+          </div>
+          <p class="text-zinc-400 mb-6">
+            Health check endpoint. Returns server status and active request count.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Regions -->
+    <section class="py-12 border-t border-white/5">
+      <div class="mx-auto max-w-4xl px-6">
+        <h2 class="text-2xl font-semibold text-white mb-8">Available Regions</h2>
+
+        <div class="grid sm:grid-cols-2 gap-4">
+          {regions.map(region => (
+            <div class="rounded-xl border border-white/5 bg-white/[0.02] p-5">
+              <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center gap-2">
+                  <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+                  <span class="font-medium text-white">{region.name}</span>
+                </div>
+                <span class="text-xs text-zinc-500">{region.country}</span>
+              </div>
+              <div class="space-y-1 text-sm">
+                <div class="flex justify-between">
+                  <span class="text-zinc-500">Region ID</span>
+                  <code class="font-mono text-zinc-400">{region.id}</code>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-zinc-500">Latency</span>
+                  <span class="text-zinc-400">{region.latency}</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- SDKs -->
+    <section class="py-12 border-t border-white/5">
+      <div class="mx-auto max-w-4xl px-6">
+        <h2 class="text-2xl font-semibold text-white mb-8">SDK Examples</h2>
+
+        <div class="space-y-6">
+          <!-- Python -->
+          <div class="rounded-xl border border-white/5 bg-white/[0.02] overflow-hidden">
+            <div class="px-4 py-3 border-b border-white/5 flex items-center gap-2">
+              <span class="text-sm font-medium text-white">Python</span>
+            </div>
+            <div class="p-5 overflow-x-auto">
+              <pre class="font-mono text-[13px] leading-relaxed"><code><span class="text-zinc-500">import</span> <span class="text-zinc-300">requests</span>
+
+response = requests.post(
+    <span class="text-emerald-400">"https://keyfetch.world/v1/fetch"</span>,
+    headers=&#123;<span class="text-emerald-400">"Authorization"</span>: <span class="text-emerald-400">f"Bearer &#123;token&#125;"</span>&#125;,
+    json=&#123;
+        <span class="text-emerald-400">"url"</span>: <span class="text-emerald-400">"https://api.example.com"</span>,
+        <span class="text-emerald-400">"region"</span>: <span class="text-emerald-400">"eu-frankfurt"</span>
+    &#125;
+)
+data = response.json()</code></pre>
+            </div>
+          </div>
+
+          <!-- JavaScript -->
+          <div class="rounded-xl border border-white/5 bg-white/[0.02] overflow-hidden">
+            <div class="px-4 py-3 border-b border-white/5 flex items-center gap-2">
+              <span class="text-sm font-medium text-white">JavaScript</span>
+            </div>
+            <div class="p-5 overflow-x-auto">
+              <pre class="font-mono text-[13px] leading-relaxed"><code><span class="text-zinc-500">const</span> response = <span class="text-zinc-500">await</span> fetch(<span class="text-emerald-400">'https://keyfetch.world/v1/fetch'</span>, &#123;
+  method: <span class="text-emerald-400">'POST'</span>,
+  headers: &#123;
+    <span class="text-emerald-400">'Authorization'</span>: <span class="text-emerald-400">`Bearer $&#123;token&#125;`</span>,
+    <span class="text-emerald-400">'Content-Type'</span>: <span class="text-emerald-400">'application/json'</span>
+  &#125;,
+  body: JSON.stringify(&#123;
+    url: <span class="text-emerald-400">'https://api.example.com'</span>,
+    region: <span class="text-emerald-400">'eu-frankfurt'</span>
+  &#125;)
+&#125;);
+<span class="text-zinc-500">const</span> data = <span class="text-zinc-500">await</span> response.json();</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-16 border-t border-white/5">
+      <div class="mx-auto max-w-xl px-6 text-center">
+        <h2 class="text-2xl font-semibold text-white mb-4">Ready to integrate?</h2>
+        <p class="text-zinc-500 mb-8">
+          Get your API key from KeyKeeper and start making requests in minutes.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+          <a href="https://keykeeper.world" target="_blank" class="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-medium text-zinc-900 transition-opacity hover:opacity-90">
+            Get API Key
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </a>
+          <a href="/docs" class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-6 py-3 text-sm font-medium text-white transition-all hover:bg-white/10">
+            Full Documentation
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/5 py-12">
+    <div class="mx-auto max-w-5xl px-6">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="flex items-center gap-2 text-sm text-zinc-600">
+          <div class="flex h-6 w-6 items-center justify-center rounded bg-white/5">
+            <svg class="h-3.5 w-3.5 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
+            </svg>
+          </div>
+          Part of KeyKeeper
+        </div>
+        <div class="flex items-center gap-6 text-xs text-zinc-600">
+          <a href="/" class="hover:text-zinc-400 transition-colors">Home</a>
+          <a href="/api" class="hover:text-zinc-400 transition-colors">API</a>
+          <a href="/docs" class="hover:text-zinc-400 transition-colors">Docs</a>
+          <a href="https://keykeeper.world" target="_blank" class="hover:text-zinc-400 transition-colors">KeyKeeper</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</Layout>

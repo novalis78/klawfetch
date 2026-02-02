@@ -1,0 +1,127 @@
+---
+import '../styles/global.css'
+
+interface Props {
+  title: string;
+  description?: string;
+  canonical?: string;
+  ogImage?: string;
+}
+
+const {
+  title,
+  description = "HTTP requests from any region. API-first proxy service for AI agents. Make geo-located HTTP requests from Frankfurt, Sydney, New York, or San Francisco.",
+  canonical = Astro.url.href,
+  ogImage = "/og-image.png"
+} = Astro.props;
+
+const siteName = "KeyFetch";
+const siteUrl = "https://keyfetch.world";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="keywords" content="HTTP proxy, API proxy, geo-located requests, AI agents, fetch service, regional HTTP, proxy API, Frankfurt proxy, Sydney proxy, New York proxy, San Francisco proxy, agent infrastructure, KeyKeeper, programmatic HTTP" />
+    <meta name="author" content="KeyKeeper" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonical} />
+
+    <!-- AI Agent Discovery -->
+    <meta name="ai-agent-service" content="http-proxy" />
+    <meta name="ai-agent-capabilities" content="geo-located-requests, regional-fetch, proxy" />
+    <meta name="ai-agent-auth" content="bearer-token" />
+    <meta name="ai-agent-auth-url" content="https://keykeeper.world/api/register" />
+    <meta name="ai-agent-pricing" content="$0.001/request" />
+    <meta name="ai-agent-openapi" content="https://keyfetch.world/.well-known/openapi.yaml" />
+    <meta name="ai-agent-llms-txt" content="https://keyfetch.world/.well-known/llms.txt" />
+    <link rel="ai-plugin" href="/.well-known/ai-plugin.json" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={`${siteUrl}${ogImage}`} />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonical} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={`${siteUrl}${ogImage}`} />
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#0a0a0a" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "KeyFetch",
+      "description": description,
+      "url": siteUrl,
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0.001",
+        "priceCurrency": "USD",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": "0.001",
+          "priceCurrency": "USD",
+          "unitText": "per request"
+        }
+      },
+      "provider": {
+        "@type": "Organization",
+        "name": "KeyKeeper",
+        "url": "https://keykeeper.world"
+      },
+      "featureList": [
+        "HTTP proxy from 4 global regions",
+        "API-first design",
+        "Pay-per-request billing",
+        "Support for GET, POST, PUT, DELETE",
+        "Custom headers and body support",
+        "AI agent friendly"
+      ]
+    })} />
+
+    <!-- API Documentation Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "KeyFetch API Documentation",
+      "description": "Complete API reference for KeyFetch HTTP proxy service",
+      "url": `${siteUrl}/docs`,
+      "author": {
+        "@type": "Organization",
+        "name": "KeyKeeper"
+      }
+    })} />
+  </head>
+  <body class="bg-[var(--color-bg)] min-h-screen">
+    <slot />
+  </body>
+</html>

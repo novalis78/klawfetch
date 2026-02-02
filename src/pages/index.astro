@@ -1,0 +1,379 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="KeyFetch — HTTP requests from any region">
+  <!-- Subtle Background -->
+  <div class="fixed inset-0 -z-10 bg-[#0a0a0a]">
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(56,189,248,0.1),transparent)]"></div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 left-0 right-0 z-50 border-b border-white/5">
+    <div class="mx-auto max-w-6xl px-6">
+      <div class="flex h-16 items-center justify-between">
+        <a href="/" class="flex items-center gap-2.5 text-white font-medium">
+          <div class="flex h-7 w-7 items-center justify-center rounded-lg bg-white/10">
+            <svg class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
+            </svg>
+          </div>
+          KeyFetch
+        </a>
+
+        <div class="hidden md:flex items-center gap-8">
+          <a href="/" class="text-[13px] text-white transition-colors">Home</a>
+          <a href="/api" class="text-[13px] text-zinc-400 hover:text-white transition-colors">API</a>
+          <a href="/docs" class="text-[13px] text-zinc-400 hover:text-white transition-colors">Docs</a>
+        </div>
+
+        <a href="https://keykeeper.world" target="_blank" class="inline-flex items-center gap-1.5 rounded-full bg-white px-4 py-1.5 text-[13px] font-medium text-zinc-900 transition-opacity hover:opacity-90">
+          Get API Key
+          <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Hero -->
+    <section class="pt-32 pb-24">
+      <div class="mx-auto max-w-3xl px-6 text-center">
+        <div class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-zinc-400 mb-8">
+          <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+          Part of the KeyKeeper ecosystem
+        </div>
+
+        <h1 class="text-[clamp(2.5rem,6vw,4rem)] font-semibold tracking-tight text-white leading-[1.1] mb-6">
+          HTTP requests from<br />any region
+        </h1>
+
+        <p class="text-lg text-zinc-400 leading-relaxed mb-4 max-w-xl mx-auto">
+          Make HTTP requests from Frankfurt, Sydney, New York, or San Francisco. No VPN, no proxy — just an API call.
+        </p>
+        <p class="text-sm text-sky-400/80 mb-10">
+          No human interaction required. Sign up and pay with crypto autonomously.
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3 mb-16">
+          <a href="https://keykeeper.world" target="_blank" class="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-medium text-zinc-900 transition-opacity hover:opacity-90">
+            Get Started
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </a>
+          <a href="#docs" class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-5 py-2.5 text-sm font-medium text-white transition-all hover:bg-white/10">
+            View Docs
+          </a>
+        </div>
+
+        <!-- Code Block -->
+        <div class="relative max-w-2xl mx-auto">
+          <div class="rounded-xl border border-white/10 bg-white/[0.02] overflow-hidden">
+            <div class="flex items-center justify-between px-4 py-2.5 border-b border-white/5">
+              <div class="flex items-center gap-1.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-white/10"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-white/10"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-white/10"></span>
+              </div>
+              <span class="text-[11px] text-zinc-600 font-mono">terminal</span>
+            </div>
+            <div class="p-5 overflow-x-auto">
+              <pre class="font-mono text-[13px] leading-relaxed text-left"><code><span class="text-zinc-500">$</span> <span class="text-zinc-300">curl</span> -X POST https://keyfetch.world/v1/fetch \
+  -H <span class="text-zinc-500">"Authorization: Bearer $KEY"</span> \
+  -d <span class="text-zinc-500">'&#123;"url":"https://api.example.com","region":"eu-frankfurt"&#125;'</span>
+
+<span class="text-zinc-600"># Response</span>
+&#123;
+  <span class="text-zinc-400">"status"</span>: <span class="text-zinc-500">200</span>,
+  <span class="text-zinc-400">"body"</span>: <span class="text-zinc-500">"..."</span>,
+  <span class="text-zinc-400">"latency_ms"</span>: <span class="text-zinc-500">142</span>
+&#125;</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Regions -->
+    <section class="py-16 border-t border-white/5">
+      <div class="mx-auto max-w-4xl px-6">
+        <div class="flex flex-wrap items-center justify-center gap-6">
+          <div class="flex items-center gap-2.5 text-sm">
+            <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+            <span class="text-zinc-500">Frankfurt</span>
+          </div>
+          <div class="flex items-center gap-2.5 text-sm">
+            <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+            <span class="text-zinc-500">Sydney</span>
+          </div>
+          <div class="flex items-center gap-2.5 text-sm">
+            <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+            <span class="text-zinc-500">New York</span>
+          </div>
+          <div class="flex items-center gap-2.5 text-sm">
+            <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+            <span class="text-zinc-500">San Francisco</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it Works -->
+    <section class="py-24 border-t border-white/5">
+      <div class="mx-auto max-w-5xl px-6">
+        <div class="text-center mb-16">
+          <p class="text-xs font-medium uppercase tracking-widest text-zinc-500 mb-3">How it works</p>
+          <h2 class="text-2xl font-semibold text-white">Three steps to fetch</h2>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-px bg-white/5 rounded-2xl overflow-hidden">
+          <div class="bg-[#0a0a0a] p-8">
+            <div class="text-xs font-medium text-zinc-600 mb-4">01</div>
+            <h3 class="text-white font-medium mb-2">Register at KeyKeeper</h3>
+            <p class="text-sm text-zinc-500 leading-relaxed">
+              Create an account at keykeeper.world. AI agents can register programmatically via API.
+            </p>
+          </div>
+          <div class="bg-[#0a0a0a] p-8">
+            <div class="text-xs font-medium text-zinc-600 mb-4">02</div>
+            <h3 class="text-white font-medium mb-2">Add credits</h3>
+            <p class="text-sm text-zinc-500 leading-relaxed">
+              Pay with USDC, BTC, or card. Credits work across all Key* services.
+            </p>
+          </div>
+          <div class="bg-[#0a0a0a] p-8">
+            <div class="text-xs font-medium text-zinc-600 mb-4">03</div>
+            <h3 class="text-white font-medium mb-2">Start fetching</h3>
+            <p class="text-sm text-zinc-500 leading-relaxed">
+              Use your KeyKeeper token with KeyFetch. Each request deducts from your balance.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="py-24 border-t border-white/5">
+      <div class="mx-auto max-w-5xl px-6">
+        <div class="text-center mb-16">
+          <p class="text-xs font-medium uppercase tracking-widest text-zinc-500 mb-3">Features</p>
+          <h2 class="text-2xl font-semibold text-white">Built for AI agents</h2>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="glass-card group relative rounded-xl p-[1px] overflow-hidden">
+            <div class="glow-border absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style="background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(56, 189, 248, 0.5), transparent 40%);"></div>
+            <div class="relative rounded-xl bg-sky-500/10 backdrop-blur-xl border border-sky-500/20 p-6 h-full">
+              <h3 class="text-white font-medium mb-2">Zero Human Interaction</h3>
+              <p class="text-sm text-zinc-500 leading-relaxed">
+                Register via KeyKeeper, fund with crypto, and use the API. No approvals, no waiting, fully autonomous.
+              </p>
+            </div>
+          </div>
+          <div class="glass-card group relative rounded-xl p-[1px] overflow-hidden">
+            <div class="glow-border absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div class="relative rounded-xl bg-white/[0.03] backdrop-blur-xl border border-white/10 p-6 h-full">
+              <h3 class="text-white font-medium mb-2">Crypto Payments</h3>
+              <p class="text-sm text-zinc-500 leading-relaxed">
+                Pay with USDC, BTC, or ETH. Top up balances programmatically. No credit card needed.
+              </p>
+            </div>
+          </div>
+          <div class="glass-card group relative rounded-xl p-[1px] overflow-hidden">
+            <div class="glow-border absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div class="relative rounded-xl bg-white/[0.03] backdrop-blur-xl border border-white/10 p-6 h-full">
+              <h3 class="text-white font-medium mb-2">Stateless</h3>
+              <p class="text-sm text-zinc-500 leading-relaxed">
+                No sessions, no cookies, no state. Each request is completely independent.
+              </p>
+            </div>
+          </div>
+          <div class="glass-card group relative rounded-xl p-[1px] overflow-hidden">
+            <div class="glow-border absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div class="relative rounded-xl bg-white/[0.03] backdrop-blur-xl border border-white/10 p-6 h-full">
+              <h3 class="text-white font-medium mb-2">API-First</h3>
+              <p class="text-sm text-zinc-500 leading-relaxed">
+                Built for machines. JSON in, JSON out. No UI required.
+              </p>
+            </div>
+          </div>
+          <div class="glass-card group relative rounded-xl p-[1px] overflow-hidden">
+            <div class="glow-border absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div class="relative rounded-xl bg-white/[0.03] backdrop-blur-xl border border-white/10 p-6 h-full">
+              <h3 class="text-white font-medium mb-2">Pay-per-Request</h3>
+              <p class="text-sm text-zinc-500 leading-relaxed">
+                No subscriptions. Use credits from your KeyKeeper account.
+              </p>
+            </div>
+          </div>
+          <div class="glass-card group relative rounded-xl p-[1px] overflow-hidden">
+            <div class="glow-border absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div class="relative rounded-xl bg-white/[0.03] backdrop-blur-xl border border-white/10 p-6 h-full">
+              <h3 class="text-white font-medium mb-2">Global Edge</h3>
+              <p class="text-sm text-zinc-500 leading-relaxed">
+                Four regions, three continents. Low latency, high availability.
+              </p>
+            </div>
+          </div>
+        </div>
+
+    <style>
+      .glass-card {
+        background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+      }
+      .glow-border {
+        background: radial-gradient(
+          600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+          rgba(56, 189, 248, 0.4),
+          transparent 40%
+        );
+      }
+    </style>
+
+    <script>
+      document.querySelectorAll('.glass-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = ((e.clientX - rect.left) / rect.width) * 100;
+          const y = ((e.clientY - rect.top) / rect.height) * 100;
+          card.style.setProperty('--mouse-x', `${x}%`);
+          card.style.setProperty('--mouse-y', `${y}%`);
+        });
+      });
+    </script>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing" class="py-24 border-t border-white/5">
+      <div class="mx-auto max-w-lg px-6">
+        <div class="text-center mb-12">
+          <p class="text-xs font-medium uppercase tracking-widest text-zinc-500 mb-3">Pricing</p>
+          <h2 class="text-2xl font-semibold text-white">Simple, per-request billing</h2>
+        </div>
+
+        <div class="rounded-2xl border border-white/10 bg-white/[0.02] p-8">
+          <div class="text-center mb-8">
+            <span class="text-4xl font-semibold text-white">$0.001</span>
+            <span class="text-zinc-500">/request</span>
+            <p class="text-sm text-zinc-600 mt-2">~1,000 requests for $1</p>
+          </div>
+
+          <div class="space-y-3 mb-8">
+            <div class="flex items-center gap-3 text-sm">
+              <svg class="h-4 w-4 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-zinc-400">All 4 regions included</span>
+            </div>
+            <div class="flex items-center gap-3 text-sm">
+              <svg class="h-4 w-4 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-zinc-400">GET, POST, PUT, DELETE</span>
+            </div>
+            <div class="flex items-center gap-3 text-sm">
+              <svg class="h-4 w-4 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-zinc-400">Custom headers & body</span>
+            </div>
+            <div class="flex items-center gap-3 text-sm">
+              <svg class="h-4 w-4 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-zinc-400">Response up to 10MB</span>
+            </div>
+          </div>
+
+          <a href="https://keykeeper.world" target="_blank" class="flex w-full items-center justify-center gap-2 rounded-lg bg-white px-4 py-2.5 text-sm font-medium text-zinc-900 transition-opacity hover:opacity-90">
+            Get API Key at KeyKeeper
+          </a>
+
+          <p class="text-center text-xs text-zinc-600 mt-4">
+            Pay with USDC, BTC, or card
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- API Reference -->
+    <section id="docs" class="py-24 border-t border-white/5">
+      <div class="mx-auto max-w-3xl px-6">
+        <div class="text-center mb-12">
+          <p class="text-xs font-medium uppercase tracking-widest text-zinc-500 mb-3">API Reference</p>
+          <h2 class="text-2xl font-semibold text-white">One endpoint</h2>
+        </div>
+
+        <div class="rounded-xl border border-white/5 bg-white/[0.02] overflow-hidden">
+          <div class="flex items-center gap-3 px-4 py-2.5 border-b border-white/5">
+            <span class="text-[11px] font-medium text-emerald-500 bg-emerald-500/10 px-2 py-0.5 rounded">POST</span>
+            <span class="text-xs font-mono text-zinc-400">/v1/fetch</span>
+          </div>
+          <div class="p-5 overflow-x-auto">
+            <pre class="font-mono text-[13px] leading-relaxed"><code><span class="text-zinc-600">// Request</span>
+&#123;
+  <span class="text-zinc-400">"url"</span>: <span class="text-zinc-500">"https://api.example.com/endpoint"</span>,
+  <span class="text-zinc-400">"region"</span>: <span class="text-zinc-500">"eu-frankfurt"</span>,
+  <span class="text-zinc-400">"method"</span>: <span class="text-zinc-500">"GET"</span>,
+  <span class="text-zinc-400">"headers"</span>: &#123;&#125;,
+  <span class="text-zinc-400">"body"</span>: &#123;&#125;
+&#125;
+
+<span class="text-zinc-600">// Response</span>
+&#123;
+  <span class="text-zinc-400">"status"</span>: <span class="text-zinc-500">200</span>,
+  <span class="text-zinc-400">"headers"</span>: &#123;&#125;,
+  <span class="text-zinc-400">"body"</span>: <span class="text-zinc-500">"..."</span>,
+  <span class="text-zinc-400">"region"</span>: <span class="text-zinc-500">"eu-frankfurt"</span>,
+  <span class="text-zinc-400">"latency_ms"</span>: <span class="text-zinc-500">142</span>
+&#125;</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-24 border-t border-white/5">
+      <div class="mx-auto max-w-xl px-6 text-center">
+        <h2 class="text-2xl font-semibold text-white mb-4">Ready to fetch?</h2>
+        <p class="text-zinc-500 mb-8">
+          Get your API key from KeyKeeper and start making requests.
+        </p>
+        <a href="https://keykeeper.world" target="_blank" class="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-medium text-zinc-900 transition-opacity hover:opacity-90">
+          Get Started at KeyKeeper
+          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/5 py-12">
+    <div class="mx-auto max-w-5xl px-6">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="flex items-center gap-2 text-sm text-zinc-600">
+          <div class="flex h-6 w-6 items-center justify-center rounded bg-white/5">
+            <svg class="h-3.5 w-3.5 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
+            </svg>
+          </div>
+          Part of Key* Ecosystem
+        </div>
+        <div class="flex items-center flex-wrap justify-center gap-x-6 gap-y-2 text-xs text-zinc-600">
+          <a href="https://keykeeper.world" target="_blank" class="hover:text-zinc-400 transition-colors">KeyKeeper</a>
+          <a href="https://keyfetch.world" class="text-zinc-400">KeyFetch</a>
+          <a href="https://keyroute.world" target="_blank" class="hover:text-zinc-400 transition-colors">KeyRoute</a>
+          <a href="https://keyspark.world" target="_blank" class="hover:text-zinc-400 transition-colors">KeySpark</a>
+          <a href="https://keyhook.world" target="_blank" class="hover:text-zinc-400 transition-colors">KeyHook</a>
+          <a href="https://keytalk.world" target="_blank" class="hover:text-zinc-400 transition-colors">KeyTalk</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</Layout>
